@@ -106,7 +106,7 @@ void Shader::Undind() const
 
 void Shader::SetUnform1f(const std::string& name, float value)
 {
-    GLCall(glUniform4f(GetUniformLocation(name), value));
+    GLCall(glUniform1f(GetUniformLocation(name), value));
 }
 
 void Shader::SetUnform4f(const std::string& name, float v0, float v1, float v2, float v3)
