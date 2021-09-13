@@ -50,7 +50,7 @@ int main(void)
             -0.5f, -0.5f, 0.0f, 0.0f,   // 0
              0.5f, -0.5f, 1.0f, 0.0f,   // 1
              0.5f,  0.5f, 1.0f, 1.0f,   // 2
-            -0.5f,  0.5f, 0.0f, 0.0f    // 3
+            -0.5f,  0.5f, 0.0f, 1.0f    // 3
         };
 
         unsigned int indices[] = {
@@ -86,11 +86,12 @@ int main(void)
 
         Renderer renderer;
    
+        /*
         float r = 0.0f, g = 0.0f, b = 0.0f;
         float r_inc = 0.05f;
         float g_inc = 0.05f;
         float b_inc = 0.05f;
-
+        */
 
 
         /* Loop until the user closes the window */
@@ -99,11 +100,12 @@ int main(void)
             /* Render here */
             renderer.Clear();
 
-            shader.Bind();
-            shader.SetUnform4f("u_Color", r, g, b, 1.0f);
+            
+            //shader.Bind();
+            //shader.SetUnform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
             
             renderer.Draw(va, ib, shader);
-            
+            /*
             if (r > 1.0f)
                 r_inc = -0.05f;
             else if (r < 0.0f)
@@ -121,7 +123,7 @@ int main(void)
             r += r_inc;
             g += g_inc;
             b += b_inc;
-
+            */
 
             /* Swap front and back buffers */
             glfwSwapBuffers(window);
