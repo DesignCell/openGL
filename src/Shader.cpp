@@ -14,8 +14,6 @@ Shader::Shader(const std::string& filepath)
 {
     ShaderProgramSource source = ParseShader(filepath);
     m_RendererID = CreateShader(source.VertexSource, source.FragmentSource);
-
-     
 }
 
 Shader::~Shader()
@@ -104,6 +102,11 @@ void Shader::Undind() const
     GLCall(glUseProgram(0));
 }
 
+void Shader::SetUnform1i(const std::string& name, int value)
+{
+    GLCall(glUniform1i(GetUniformLocation(name), value));
+}
+
 void Shader::SetUnform1f(const std::string& name, float value)
 {
     GLCall(glUniform1f(GetUniformLocation(name), value));
@@ -114,12 +117,12 @@ void Shader::SetUnform4f(const std::string& name, float v0, float v1, float v2, 
     GLCall(glUniform4f(GetUniformLocation(name), v0, v1, v2, v3));
 }
 
-unsigned int Shader::GetUniformLocation(const std::string& name)
+int Shader::GetUniformLocation(const std::string& name)
 {
     if (m_UniformLocationCahce.find(name) != m_UniformLocationCahce.end())
         return m_UniformLocationCahce[name];
 
-    GLCall(unsigned int location = glGetUniformLocation(m_RendererID, name.c_str()));
+    GLCall(int location = glGetUniformLocation(m_RendererID, name.c_str()));
     if (location == -1)
         std::cout << "Warning: Uniform '" << name << "' doesn't exist!" << std::endl;
     else
