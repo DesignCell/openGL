@@ -50,10 +50,10 @@ int main(void)
     {
 
         float positions[] = {
-            -10.5f, -10.5f, 0.0f, 0.0f,   // 0
-             10.5f, -10.5f, 1.0f, 0.0f,   // 1
-             10.5f,  10.5f, 1.0f, 1.0f,   // 2
-            -10.5f,  10.5f, 0.0f, 1.0f    // 3
+             100.0f,  100.0f, 0.0f, 0.0f,   // 0
+             200.0f,  100.0f, 1.0f, 0.0f,   // 1
+             200.0f,  200.0f, 1.0f, 1.0f,   // 2
+             100.0f,  200.0f, 0.0f, 1.0f    // 3
         };
 
         unsigned int indices[] = {
@@ -75,6 +75,9 @@ int main(void)
         IndexBuffer ib(indices, 6);
 
         glm::mat4 proj = glm::ortho(0.0f, 960.0f, 0.0f, 540.0f, -1.0f, 1.0f);
+        glm::vec4 vp(100.0f, 100.0f, 0.0f, 1.0f);
+
+        glm::vec4 result = proj * vp;
 
         Shader shader("res/shaders/Basic.shader");
         shader.Bind();
@@ -97,31 +100,9 @@ int main(void)
         {
             /* Render here */
             renderer.Clear();
-
-            
-            //shader.Bind();
-            //shader.SetUnform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
             
             renderer.Draw(va, ib, shader);
-            /*
-            if (r > 1.0f)
-                r_inc = -0.05f;
-            else if (r < 0.0f)
-                r_inc = 0.05f;
-
-            if (g > 1.0f)
-                g_inc = -0.05f / 3;
-            else if (g < 0.0f)
-                g_inc = 0.05f / 2;
-            if (b > 1.0f)
-                b_inc = -0.05f / 2;
-            else if (b < 0.0f)
-                b_inc = 0.05f / 3;
-
-            r += r_inc;
-            g += g_inc;
-            b += b_inc;
-            */
+    
 
             /* Swap front and back buffers */
             glfwSwapBuffers(window);
