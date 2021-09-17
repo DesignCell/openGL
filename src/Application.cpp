@@ -83,7 +83,7 @@ int main(void)
 
         Shader shader("res/shaders/Basic.shader");
         shader.Bind();
-        //shader.SetUniform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
+        shader.SetUniform4f("u_Color", 0.8f, 0.3f, 0.8f, 1.0f);
         
         Texture texture("res/textures/ChernoLogo.png");
         texture.Bind();
@@ -117,11 +117,9 @@ int main(void)
 			glm::mat4 mvp = proj * view * model;
             shader.SetUniformMat4f("u_MVP", mvp);
 
-            {
-				ImGui::SliderFloat3("Translation", &translation.x, 0.0f, 960.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-				ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-            }
-            
+            ImGui::SliderFloat3("Translation", &translation.x, 0.0f, 960.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+                        
             renderer.Draw(va, ib, shader);
     
             ImGui::Render();
